@@ -22,5 +22,6 @@ node {
   def mvnHome = tool 'M3'
  //  sh "${mvnHome}/bin/mvn -B verify"
   sh "${mvnHome}/bin/mvn package"
-
+   stage 'conclude'
+   echo "Building flavor"
  }
