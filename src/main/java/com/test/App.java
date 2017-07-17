@@ -8,6 +8,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello testing 8-jenkin-test1!" );
+        System.out.println( "Hello testing 8-jenkin-test1!-good for demo" );
     }
 }
