@@ -1,5 +1,5 @@
 node {
-  label 'test1' 
+  currentBuild.displayName = 'test1' 
   // Mark the code checkout 'stage'....
   //stage 'Stage Checkout'
 
@@ -15,7 +15,7 @@ node {
 
   //def flavor = flavor(env.BRANCH_NAME)
   git "https://github.com/anandchristal/test1.git"
-  echo "Building flavor"
+  sh "echo Building flavor"
   //sh "mvn package"
   
   stage 'Build'
@@ -23,5 +23,5 @@ node {
  //  sh "${mvnHome}/bin/mvn -B verify"
   sh "${mvnHome}/bin/mvn package"
    stage 'conclude'
-   echo "Building flavor"
+  sh "echo end"
  }
