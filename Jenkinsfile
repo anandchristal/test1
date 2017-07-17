@@ -1,5 +1,6 @@
 node {
-  currentBuild.displayName = 'test1' 
+  version = "1.0" + env.BUILD_NUMBER
+  currentBuild.displayName = 'test1' + '-'+ version
   // Mark the code checkout 'stage'....
   //stage 'Stage Checkout'
 
