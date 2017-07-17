@@ -1,27 +1,25 @@
 node {
-    // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
-   def server = Artifactory.server "Trial_1"
-    // Create an Artifactory Maven instance.
-    def rtMaven = Artifactory.newMavenBuild()
-    def buildInfo
+  // Mark the code checkout 'stage'....
+  //stage 'Stage Checkout'
 
-    stage('Clone sources') {
-        git url: 'https://github.com/anandchristal/test1.git'
-    }
+  // Checkout code from repository and update any submodules
+ // checkout scm
+  //sh 'git submodule update --init'  
 
-    stage('Artifactory configuration') {
-        // Tool name from Jenkins configuration
-        rtMaven.tool = "Maven-3.3.9"
-        // Set Artifactory repositories for dependencies resolution and artifacts deployment.
-        rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
-        rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
-    }
+  stage 'CheckOut'
 
-    stage('Maven build') {
-        buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean install'
-    }
+  //branch name from Jenkins environment variables
+  //echo "My branch is: ${env.BRANCH_NAME}"
+   // stage 'test'
 
-    stage('Publish build info') {
-        server.publishBuildInfo buildInfo
-    }
-}
+  //def flavor = flavor(env.BRANCH_NAME)
+  git "https://github.com/anandchristal/test1.git"
+  echo "Building flavor"
+  //sh "mvn package"
+  
+  stage 'Build'
+  def mvnHome = tool 'M3'
+ //  sh "${mvnHome}/bin/mvn -B verify"
+  sh "${mvnHome}/bin/mvn package"
+
+ }
